@@ -71,8 +71,7 @@ makeWrapped ''PatchMapWithMove
 instance FunctorWithIndex k (PatchMapWithMove k)
 instance FoldableWithIndex k (PatchMapWithMove k)
 instance TraversableWithIndex k (PatchMapWithMove k) where
-  itraverse = itraversed . Indexed
-  itraversed = _Wrapped .> itraversed <. traversed
+  itraverse f (PatchMapWithMove xs) = PatchMapWithMove <$> itraverse (\i -> traverse (f i)) xs
 
 -- | Create a 'PatchMapWithMove', validating it
 patchMapWithMove :: Ord k => Map k (NodeInfo k v) -> Maybe (PatchMapWithMove k v)

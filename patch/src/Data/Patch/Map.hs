@@ -58,8 +58,7 @@ instance Ord k => Patch (PatchMap k v) where
 instance FunctorWithIndex k (PatchMap k)
 instance FoldableWithIndex k (PatchMap k)
 instance TraversableWithIndex k (PatchMap k) where
-  itraverse = itraversed . Indexed
-  itraversed = _Wrapped .> itraversed <. traversed
+  itraverse f (PatchMap xs) = PatchMap <$> itraverse (\i -> traverse (f i)) xs
 
 -- | Returns all the new elements that will be added to the 'Map'
 patchMapNewElements :: PatchMap k v -> [v]
