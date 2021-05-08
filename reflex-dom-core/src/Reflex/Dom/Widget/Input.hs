@@ -12,6 +12,7 @@
 #ifdef USE_TEMPLATE_HASKELL
 {-# LANGUAGE TemplateHaskell #-}
 #endif
+{-# LANGUAGE TypeInType #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 module Reflex.Dom.Widget.Input (module Reflex.Dom.Widget.Input, def, (&), (.~)) where
@@ -31,6 +32,7 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Maybe
 import Data.Semigroup
+import Data.Kind (Type)
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified GHCJS.DOM.GlobalEventHandlers as Events
@@ -235,7 +237,7 @@ checkbox checked config = do
     , _checkbox_change = _inputElement_checkedChange i
     }
 
-type family CheckboxViewEventResultType (en :: EventTag) :: * where
+type family CheckboxViewEventResultType (en :: EventTag) :: Type where
   CheckboxViewEventResultType 'ClickTag = Bool
   CheckboxViewEventResultType t = EventResultType t
 
@@ -371,7 +373,7 @@ instance Reflex t => Default (DropdownConfig t k) where
                        , _dropdownConfig_attributes = constDyn mempty
                        }
 
-type family DropdownViewEventResultType (en :: EventTag) :: * where
+type family DropdownViewEventResultType (en :: EventTag) :: Type where
   DropdownViewEventResultType 'ChangeTag = Text
   DropdownViewEventResultType t = EventResultType t
 
@@ -651,7 +653,7 @@ instance HasSetValue (CheckboxConfig t) where
   setValue = checkboxConfig_setValue
 
 class HasValue a where
-  type Value a :: *
+  type Value a :: Type
   value :: a -> Value a
 
 instance HasValue (InputElement er d t) where
