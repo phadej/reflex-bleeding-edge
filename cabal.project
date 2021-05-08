@@ -1,6 +1,44 @@
+index-state: 2021-05-08T10:46:01Z
+
 packages: reflex
 packages: reflex-dom-core
+packages: patch
+packages: monoidal-containers
+
+tests: True
+
+-- newer dependencies
+constraints: attoparsec        ^>=0.14.1
+constraints: base64-bytestring ^>=1.2.0.1
+constraints: constraints       ^>=0.13
+constraints: dependent-sum     ^>=0.7.1.0
+constraints: lens              ^>=5.0.1
+constraints: random            ^>=1.2.0
+constraints: ref-tf            ^>=0.5
+constraints: semialign         ^>=1.2
+constraints: some              ^>=1.0.3
+constraints: witherable        ^>=0.4.1
+
+-- Obsidian Systems packages:
+allow-newer: dependent-sum-0.7.1.0:some
+
+allow-newer: constraints-extras-0.3.1.0:constraints
+
+-- JSaddle
+allow-newer: jsaddle-0.9.7.1:attoparsec
+allow-newer: jsaddle-0.9.7.1:lens
+allow-newer: jsaddle-0.9.7.1:ref-tf
+allow-newer: jsaddle-0.9.7.1:base64-bytestring
+
+allow-newer: jsaddle-dom-0.9.4.1:lens
+
+-- https://github.com/jaspervdj/websockets/issues/219
+allow-newer: websockets-0.12.7.2:attoparsec
 
 -- haskell-src-exts is expensive
 constraints: reflex -use-template-haskell
 constraints: haskell-src-exts <0
+
+-- these tests are not available (need unrelased chrome-test-utils)
+constraints: reflex-dom-core -hydration-tests
+constraints: reflex-dom-core -gc-tests
