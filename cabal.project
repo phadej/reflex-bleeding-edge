@@ -1,2 +1,6 @@
 packages: reflex
 packages: reflex-dom-core
+
+-- haskell-src-exts is expensive
+constraints: reflex -use-template-haskell
+constraints: haskell-src-exts <0
