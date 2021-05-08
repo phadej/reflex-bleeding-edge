@@ -4,6 +4,7 @@ packages: reflex
 packages: reflex-dom-core
 packages: patch
 packages: monoidal-containers
+packages: jsaddle
 
 tests: True
 
@@ -40,14 +41,24 @@ allow-newer: jsaddle-0.9.7.1:lens
 allow-newer: jsaddle-0.9.7.1:ref-tf
 allow-newer: jsaddle-0.9.7.1:base64-bytestring
 
+allow-newer: jsaddle-dom-0.9.4.1:Cabal
+allow-newer: jsaddle-dom-0.9.4.1:base
 allow-newer: jsaddle-dom-0.9.4.1:lens
 
 -- https://github.com/jaspervdj/websockets/issues/219
 allow-newer: websockets-0.12.7.2:attoparsec
 
+-- https://github.com/haskell-hvr/newtype/issues/4
+allow-newer: newtype-0.2.2.0:base
+
 -- haskell-src-exts is expensive
 constraints: reflex -use-template-haskell
 constraints: haskell-src-exts <0
+
+-- for GHC-9.0, no TH for reflex-dom-core
+constraints: reflex-dom-core -use-template-haskell
+constraints: th-extras <0
+constraints: dependent-sum-template <0
 
 -- these tests are not available (need unrelased chrome-test-utils)
 constraints: reflex-dom-core -hydration-tests
