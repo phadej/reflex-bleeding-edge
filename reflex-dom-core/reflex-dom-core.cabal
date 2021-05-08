@@ -29,6 +29,9 @@ extra-source-files: src-ghc/Foreign/JavaScript/Internal/Utils.hs
                     src/Reflex/Dom/Xhr/Exception.hs
                     ChangeLog.md
 
+tested-with:
+  GHC  ==8.4.4 || ==8.6.5 || ==8.8.4 || ==8.10.4
+
 flag use-template-haskell
   description: Use template haskell to generate lenses
   default: True
@@ -155,7 +158,7 @@ library
 
   default-language: Haskell98
   ghc-options: -Wall -fwarn-tabs -funbox-strict-fields -O2 -ferror-spans -fspecialise-aggressively
-  ghc-prof-options: -fprof-auto
+  -- ghc-prof-options: -fprof-auto
 
   if flag(expose-all-unfoldings)
     ghc-options: -fexpose-all-unfoldings
@@ -224,7 +227,7 @@ test-suite hydration
                , which
   hs-source-dirs: test
   ghc-options: -rtsopts -with-rtsopts=-T -Wall -fwarn-tabs -funbox-strict-fields -O2 -ferror-spans
-  ghc-prof-options: -fprof-auto -optP-DPROFILING
+  -- ghc-prof-options: -fprof-auto -optP-DPROFILING
   main-is: hydration.hs
   type: exitcode-stdio-1.0
   default-language: Haskell98
@@ -244,7 +247,7 @@ test-suite gc
                , text
   hs-source-dirs: test
   ghc-options: -rtsopts -with-rtsopts=-T -Wall -fwarn-tabs -funbox-strict-fields -O2 -ferror-spans
-  ghc-prof-options: -fprof-auto -optP-DPROFILING
+  -- ghc-prof-options: -fprof-auto -optP-DPROFILING
   main-is: gc.hs
   type: exitcode-stdio-1.0
   default-language: Haskell98

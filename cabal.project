@@ -12,12 +12,22 @@ constraints: attoparsec        ^>=0.14.1
 constraints: base64-bytestring ^>=1.2.0.1
 constraints: constraints       ^>=0.13
 constraints: dependent-sum     ^>=0.7.1.0
+constraints: dlist             ^>=1.0
+constraints: hashable          ^>=1.3.1.0
 constraints: lens              ^>=5.0.1
 constraints: random            ^>=1.2.0
 constraints: ref-tf            ^>=0.5
 constraints: semialign         ^>=1.2
 constraints: some              ^>=1.0.3
 constraints: witherable        ^>=0.4.1
+
+-- GHCJS
+-- https://github.com/ghcjs/ghcjs-base/commit/18f31dec5d9eae1ef35ff8bbf163394942efd227
+allow-newer: ghcjs-base:aeson
+allow-newer: ghcjs-base:attoparsec
+allow-newer: ghcjs-base:dlist
+allow-newer: ghcjs-base:hashable
+allow-newer: ghcjs-base:primitive
 
 -- Obsidian Systems packages:
 allow-newer: dependent-sum-0.7.1.0:some
@@ -42,3 +52,6 @@ constraints: haskell-src-exts <0
 -- these tests are not available (need unrelased chrome-test-utils)
 constraints: reflex-dom-core -hydration-tests
 constraints: reflex-dom-core -gc-tests
+
+-- disallow HLint, so we don't build it accidentally
+constraints: hlint <0
