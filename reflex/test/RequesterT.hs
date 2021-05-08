@@ -41,6 +41,12 @@ import Reflex.Requester.Base
 import Reflex.Requester.Class
 import Test.Run
 
+data TestRequest a where
+  TestRequest_Reverse :: String -> TestRequest String
+  TestRequest_Increment :: Int -> TestRequest Int
+
+deriveArgDict ''TestRequest
+
 data RequestInt a where
   RequestInt :: Int -> RequestInt Int
 
@@ -196,9 +202,7 @@ delayedPulse pulse = void $ flip runWithReplace (pure () <$ pulse) $ do
     (_, pulse') <- runWithReplace (pure ()) $ pure (RequestInt 1) <$ pulse
     requestingIdentity pulse'
 
-data TestRequest a where
-  TestRequest_Reverse :: String -> TestRequest String
-  TestRequest_Increment :: Int -> TestRequest Int
+
 
 testMatchRequestsWithResponses
   :: forall m t req a
@@ -227,9 +231,8 @@ testMatchRequestsWithResponses pulse = mdo
       , \x -> has @Read r $ readMaybe x
       )
 
-deriveArgDict ''TestRequest
-
 instance Show (TestRequest a) where
   show = \case
     TestRequest_Reverse str -> "reverse " <> str
     TestRequest_Increment i -> "increment " <> show i
+
